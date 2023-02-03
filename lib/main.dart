@@ -51,8 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
     required dynamic paramsC,
   }) {
     if (_counter % 2 == 0) {
+      if (_counter > 0) {
+        return;
+      }
       return;
     } else {
+      if (_counter > 0) {
+        return;
+      }
       return;
     }
 
@@ -100,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+             Text(
               'You have pushed the button this many times:',
             ),
             Text(
