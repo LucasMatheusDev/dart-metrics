@@ -62,6 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
     //   return;
     // }
 
+    if (_counter % 2 == 0) {
+      if (_counter > 0) {
+        return;
+      }
+      return;
+    }
+
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
