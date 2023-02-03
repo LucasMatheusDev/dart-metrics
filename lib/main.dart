@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            
+
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
@@ -129,8 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
           name: 'name',
           age: 1,
           isMale: true,
-          params: 'params',
-          paramsA: 'paramsA',
+          params: 'jjjjjj',
+          paramsA: 'pssssaramsA',
           paramsB: 'paramsB',
           paramsC: 'paramsC',
         ),
