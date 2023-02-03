@@ -1,0 +1,11 @@
+image: dart
+
+pipelines:
+  default:
+    - step:
+        name: analyze
+        script:
+          - dart pub global activate dart_code_metrics
+          - dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib > checkstyle-result.xml
+        after-script:
+          - pipe: atlassian/checkstyle-report:0.3.1
