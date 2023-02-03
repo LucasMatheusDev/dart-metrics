@@ -2,8 +2,6 @@ workflows:
   pr-development-android:
     name: PR metrics
 
-
-
     triggering:
       events:
         - pull_request
