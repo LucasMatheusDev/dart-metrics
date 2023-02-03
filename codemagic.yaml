@@ -10,9 +10,13 @@ workflows:
           include: true
           source: false
       cancel_previous_builds: true
+    
     scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
       - echo 'previous step'
-      - name: Dart Code Metrics
+      - name: Dart Code Metrics 
         script: |
           mkdir -p metrics-results
           flutter pub run dart_code_metrics:metrics analyze lib --reporter=json > metrics-results/dart_code_metrics.json
