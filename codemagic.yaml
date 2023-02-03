@@ -1,8 +1,9 @@
 workflows:
   pr-development-android:
     name: PR metrics
-    instance_type: mac_pro
-    max_build_duration: 20
+
+
+
     triggering:
       events:
         - pull_request
