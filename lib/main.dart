@@ -50,17 +50,17 @@ class _MyHomePageState extends State<MyHomePage> {
     required dynamic paramsB,
     required dynamic paramsC,
   }) {
-    // if (_counter % 2 == 0) {
-    //   if (_counter > 0) {
-    //     return;
-    //   }
-    //   return;
-    // } else {
-    //   if (_counter > 0) {
-    //     return;
-    //   }
-    //   return;
-    // }
+    if (_counter % 2 == 0) {
+      if (_counter > 0) {
+        return;
+      }
+      return;
+    } else {
+      if (_counter > 0) {
+        return;
+      }
+      return;
+    }
 
     if (_counter % 2 == 0) {
       if (_counter > 0) {
@@ -121,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+
           ],
         ),
       ),
