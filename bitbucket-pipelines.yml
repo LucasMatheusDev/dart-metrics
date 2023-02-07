@@ -2,7 +2,7 @@ image: dart
 # PIPELINE PARA RODAR SOMENTE QUANDO FOR PULL REQUEST PARA A MASTER
 pipelines:
   pull-requests:
-    master:
+    'master':
       - step:
           name: analyze
           script:
