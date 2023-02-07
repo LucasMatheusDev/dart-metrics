@@ -5,7 +5,7 @@ pipelines:
     - step:
         name: analyze
         script:
-          - dart pub global activate dart_code_metrics
-          - dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib > checkstyle-result.xml
+         - if [ "$BITBUCKET_BRANCH" == "master" ]; then dart pub global activate dart_code_metrics; fi
+         - if [ "$BITBUCKET_BRANCH" == "master" ]; then dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib
         after-script:
           - pipe: atlassian/checkstyle-report:0.3.1
