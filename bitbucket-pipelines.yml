@@ -2,14 +2,15 @@ image: dart
 # PIPELINE PARA RODAR SOMENTE QUANDO FOR PULL REQUEST PARA A MASTER
 pipelines:
   pull-requests:
-    'master':
+    '**':
       - step:
-          name: analyze
+          name: Dart Code Metrics
           script:
-           - dart pub global activate dart_code_metrics
-           - dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib
+          - if [ "$BITBUCKET_BRANCH" == "master" ]; then dart pub global activate Dart_code_metrics; fi
+          - if [ "$BITBUCKET_BRANCH" == "master" ]; then dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib; fi
           after-script:
-            - atlassian/checkstyle-report:0.3.1
+          - if [ "$BITBUCKET_BRANCH" == "master" ]; then atlassian/checkstyle-report:0.3.1; fi
           artifacts:
-            - checkstyle.xml
+          -  if [ "$BITBUCKET_BRANCH" == "master" ]; then checkstyle.xml; fi
+      
           
