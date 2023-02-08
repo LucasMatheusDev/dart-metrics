@@ -70,6 +70,8 @@ após fazer isso você o dart metrics já estará ativo e pronto para ser usado 
  # Dart metrics no CI 
 Para usar o dart metrics no CI, especificamente como pipeline no bitbucket, voce deve criar o arquivo `bitbucket-pipelines.yml` na raiz do seu projeto e adicionar o seguinte código:
 
+*note: substitua `BRANCH_ALVO` pelo nome da branch alvo que você deseja que o dart metrics rode.*
+
 ```yaml
 image: dart
 
@@ -93,7 +95,7 @@ pipelines:
       
        
 ```
-*note: substitua `BRANCH_ALVO` pelo nome da branch alvo que você deseja que o dart metrics rode.*
+
 
 
 Este código irá rodar o dart metrics somente quando for feito um pull request para a branch alvo, e irá gerar um relatório em html e um relatório em checkstyle, que pode ser usado para ser integrado com o bitbucket.
