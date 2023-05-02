@@ -1,10 +1,10 @@
 # metrics_example
 
-Um projeto de exemplo usando o pacote [dart metrics](https://pub.dev/packages/metrics).
+An example project using the [dart metrics](https://pub.dev/packages/metrics) package.
 
-## Como usar
+## How to use
 
-Para usar o pacote, você precisa adicionar o seguinte código no seu arquivo `pubspec.yaml` na seção `dev_dependencies`:
+To use the package, you need to add the following code in your `pubspec.yaml` file in the `dev_dependencies` section:
 
 ```yaml
 dev_dependencies:
@@ -14,7 +14,7 @@ dev_dependencies:
   dart_code_metrics: ^5.3.0
 ```
 
-Após isso, criei ou configure o arquivo `analysis_options.yaml` com as regras que serão usadas para analisar o seu projeto. Por exemplo:
+After that, create or configure the `analysis_options.yaml` file with the rules that will be used to analyze your project. For example:
 
 ```yaml
  
@@ -51,26 +51,27 @@ dart_code_metrics:
 
 ```
 
-## Ativando o Dart Code Metrics
+## Activating Dart Code Metrics
 
-Para ativar o Dart Code Metrics, rode o seguinte comando no terminal:
+To activate Dart Code Metrics, run the following command in the terminal:
 
 ```bash
 dart pub global activate dart_code_metrics
 ```
-após fazer isso você o dart metrics já estará ativo e pronto para ser usado e ja estara analisando todo o código do seu projeto.
+
+After this, the dart metrics will be active and ready to be used and will already be analyzing all the code in your project.
 
 ----
 
-## Exemplo de Analise em tempo real
-[![analise](assets/analise.png)](assets/analise.png)
+## Real-Time Analysis Example
+[![analysis](assets/analysis.png)](assets/analysis.png)
 
 
 
- # Dart metrics no CI 
-Para usar o dart metrics no CI, especificamente como pipeline no bitbucket, voce deve criar o arquivo `bitbucket-pipelines.yml` na raiz do seu projeto e adicionar o seguinte código:
+# Dart Metrics on CI 
+To use the dart metrics on CI, specifically as a pipeline in Bitbucket, you must create the `bitbucket-pipelines.yml` file at the root of your project and add the following code:
 
-*note: substitua `BRANCH_ALVO` pelo nome da branch alvo que você deseja que o dart metrics rode.*
+*note: replace `TARGET_BRANCH` with the name of the target branch you want the dart metrics to run on.*
 
 ```yaml
 image: dart
@@ -81,11 +82,12 @@ pipelines:
       - step:
           name: Dart Code Metrics
           script:
-          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "BRANCH_ALVO" ]; then dart pub global activate dart_code_metrics; fi
+          # *note: replace `TARGET_BRANCH` with the name of the target branch you want the dart metrics to run on.*
+          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "TARGET_BRANCH" ]; then dart pub global activate dart_code_metrics; fi
 
-          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "BRANCH_ALVO" ]; then dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib > checkstyle-result.xml; fi || exit 0 
+          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "TARGET_BRANCH" ]; then dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib > checkstyle-result.xml; fi || exit 0 
 
-          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "BRANCH_ALVO" ]; then dart run dart_code_metrics:metrics analyze lib -r html; fi
+          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "TARGET_BRANCH" ]; then dart run dart_code_metrics:metrics analyze lib -r html; fi
           
 
           artifacts:
@@ -98,49 +100,15 @@ pipelines:
 
 
 
-Este código irá rodar o dart metrics somente quando for feito um pull request para a branch alvo, e irá gerar um relatório em html e um relatório em checkstyle, que pode ser usado para ser integrado com o bitbucket.
+This code will run the dart metrics only when a pull request is made to the target branch and will generate an HTML report and a checkstyle report, which can be used to be integrated with Bitbucket.
 
-## Arquivo checkstyle-result.xml
+## checkstyle-result.xml File
 [![checkstyle](assets/checkstyle-result.xml)](assets/checkstyle-result.xml) 
 
-Esteserá reportado no bitbucket como no exemplo abaixo:
+This will be reported in Bitbucket as in the example below:
 
 [![bitbucket](assets/checkstyle.png)](assets/checkstyle.png)
 
-Caso tenha alguma advertencia ou erro, o icone do checkstyle irá ficar vermelho, como no exemplo acima.
+If there is any warning or error, the checkstyle icon will turn red, as in the example above.
 
-Ao clicar no report, será aberto uma página com o relatório mais detalhado da analise feita pelo dart metrics, como no exemplo abaixo: 
-
-[![html](assets/bitbucket_analise.png)](assets/bitbucket_analise.png)
-
-Aqui você pode ver os erros e advertencias do seu projeto, e clicar em cada um deles para ver o código que está gerando o erro ou a advertencia.
-
-
-## Analise mais profunda atraves do relatório em html
- além do relatório em checkstyle, o dart metrics também gera um relatório em html, que pode ser atraves dos artefatos gerados pelo pipeline no bitbucket, para acessa-los, basta clicar no build do pipeline e ir na aba artefatos e clicar no icone de nuvem para baixar o relatório em html, como no exemplo abaixo :
-
-
-[![PIPELINE](assets/click_pipe.png)](assets/click_pipe.png)
-
-
-[![artefatos](assets/metric_html_download.png)](assets/metric_html_download.png)
-
-
-Apos isso é só descompactar a pasta e abrir o arquivo `index.html` no seu navegador, como no exemplo abaixo:
-
-[![html](assets/zip_files.png)](assets/zip_files.png)
-
-Clicando em `lib` voce pode acessar os arquivos do seu projeto e ver os erros e advertencias de cada um deles.
-
-[![html](assets/metric_html.png)](assets/metric_html.png)
-
-exemplo de analise de um arquivo:
-[![html](assets/metric_file.png)](assets/metric_file.png)
-
-
-
-
-
-# Para mais informações sobre o Dart Code Metrics acesse o link abaixo:
-https://dcm.dev/docs/individuals/getting-started
-
+Clicking on the report will open a page with the more detailed report of the analysis done by the dart metrics, as in the

@@ -6,9 +6,9 @@ pipelines:
       - step:
           name: Dart Code Metrics
           script:
-          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "master" ]; then dart pub global activate dart_code_metrics; fi
-          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "master" ]; then dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib > checkstyle-result.xml; fi || exit 0 
-          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "master" ]; then dart run dart_code_metrics:metrics analyze lib -r html; fi
+          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "development" ]; then dart pub global activate dart_code_metrics; fi
+          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "development" ]; then dart pub global run dart_code_metrics:metrics analyze --fatal-style --fatal-performance --fatal-warnings --reporter=checkstyle lib > checkstyle-result.xml; fi || exit 0 
+          - if [ "$BITBUCKET_PR_DESTINATION_BRANCH" == "development" ]; then dart run dart_code_metrics:metrics analyze lib -r html; fi
           artifacts:
                  - metrics/**
           after-script:
